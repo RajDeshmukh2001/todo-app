@@ -2,6 +2,9 @@ package com.mvc.todo.repository;
 
 import com.mvc.todo.model.Task;
 
+import java.util.List;
+
 public interface TaskRepository {
-    Task saveTask(Task task);
+    Task save(Task task);
+
 }
