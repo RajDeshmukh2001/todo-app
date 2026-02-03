@@ -4,6 +4,7 @@ import com.mvc.todo.model.Priority;
 import com.mvc.todo.model.Task;
 import com.mvc.todo.service.TaskService;
 import com.mvc.todo.validator.CreateTaskRequest;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,7 +17,7 @@ public class TaskController {
     }
 
     @PostMapping("/create")
-    public Task create(@RequestBody CreateTaskRequest request) {
+    public Task create(@Valid @RequestBody CreateTaskRequest request) {
         return taskService.createTask(request.getTitle(), request.getDescription(), request.getPriority());
     }
 }
