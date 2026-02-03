@@ -14,7 +14,7 @@ public class TaskService {
     }
 
     public Task createTask(String title, String description, Priority priority) {
-        if (taskRepository.isExistsByTitle(title)) {
+        if (taskRepository.isExistsByTitle((title.trim().replaceAll("\\s+ ", " ")))) {
             throw new IllegalArgumentException("Task with title '" + title + "' already exists.");
         }
         Task task = new Task(title, description, priority);
