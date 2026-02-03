@@ -15,6 +15,6 @@ public class TaskService {
 
     public Task createTask(String title, String description, Priority priority) {
         Task task = new Task(title, description, priority);
-        return taskRepository.saveTask(task);
+        return taskRepository.save(task);
     }
 }
