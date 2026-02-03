@@ -16,6 +16,10 @@ public class InMemoryTaskRepository implements TaskRepository {
         taskMap.put(task.getId(), task);
         return task;
     }
+    @Override
+    public List<Task> findAll() {
+        return new ArrayList<>(taskMap.values());
+    }
 
 
 }
