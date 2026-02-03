@@ -18,8 +18,9 @@ public class Task {
         this.description = description;
         this.status = Status.PENDING;
         this.priority = priority;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now();
+        this.createdAt = now;
+        this.updatedAt = now;
     }
 
     public String getId() {
