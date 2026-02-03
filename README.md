@@ -3,6 +3,15 @@
 ## Problem Statement
 Design and implement a robust RESTful API for a Task Management System. The application must be built using the Model-View-Controller (MVC) architectural pattern, where the "View" is represented by JSON responses, No Database. The primary goal is to demonstrate mastery of Object-Oriented Programming (OOP) and Clean Architecture.
 
+## Tech Stack
+
+- Language: [Java 21](https://www.oracle.com/in/java/technologies/downloads/#java21)  
+- Framework: [Spring Boot 3.4.2](https://spring.io/blog/2025/02/20/spring-boot-3-4-3-available-now)  
+- Build Tool: [Maven](https://maven.apache.org/)  
+- Architecture: [MVC](https://en.wikipedia.org/wiki/Model-view-controller)
+
+
+
 #### Each task should have:
 - A unique identifier (UUID).
 - A title (required, max 100 chars).
@@ -44,22 +53,70 @@ Each task will have:
 
 ---
 
-## Architecture Overview
+## Features Implemented
 
-The project follows **MVC + Clean Architecture**:
+### 1. Create Task API
+Allows users to create new tasks with strict validation rules.
+- **Auto-generated ID:** Each task gets a unique UUID.
+- **Timestamps:** Automatically records `createdAt` and `updatedAt`.
+- **Default Status:** New tasks are set to `PENDING` by default.
+- **Duplicate Prevention:** The system checks if a task with the same title already exists before saving.
+- **Input Validation:** Ensures titles and descriptions meet length requirements.
 
-- **Controller Layer**
-    - Handles HTTP requests and responses
-    - Delegates business logic to services
+```markdown
+### Clone \& Run the Application
+You need to get the code and start the backend server first.
 
-- **Service Layer**
-    - Contains business rules and validations
-    - Coordinates between controller and repository
+```bash
+# 1. Clone the repository
+git clone https://github.com/RajDeshmukh2001/todo-app.git
 
-- **Model Layer**
-    - Represents domain objects and enums
-    - Independent of frameworks
+# 2. Navigate into the project directory
+cd todo-app
 
-- **Repository Layer**
-    - In-memory data storage
-    - Abstracted using interfaces for future DB support
+# 3. Start the server (Using Maven Wrapper)
+./mvnw spring-boot:run
+```
+
+Success: You will see Started TodoApplication in ... seconds in your terminal. The server is now running at http://localhost:8080.
+
+### Test with Postman
+To create a task, send a POST request with the JSON payload shown below.
+
+- Open Postman.
+- Create a new request.
+- Method: POST
+- URL: `http://localhost:8080/v1/api/tasks/create`
+- Body: raw `JSON` and paste the payload.
+
+```json
+{
+    "title": "   Complete Backend Demo   ",
+    "description": "Test the Create Task feature using Postman and verify the response.",
+    "priority": "HIGH"
+}
+```
+
+### Verify the Result
+
+Expected Success Response \(200 OK\):
+
+```json
+{
+    "id": "c5f8d2-418b-4c5c-a5cb-150fd7200ab6",
+    "title": "Complete Backend Demo",
+    "description": "Test the Create Task feature using Postman and verify the response.",
+    "status": "PENDING",
+    "priority": "HIGH",
+    "createdAt": "2026-02-04T12:00:00.000",
+    "updatedAt": "2026-02-04T12:00:00.000"
+}
+```
+
+ Expected Failure \(Duplicate Title\):
+
+Plaintext:
+
+```
+Error: Task with title 'Complete Backend Demo' already exists.
+```
