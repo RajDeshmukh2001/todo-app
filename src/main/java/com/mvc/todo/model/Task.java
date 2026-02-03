@@ -55,4 +55,8 @@ public class Task {
         this.title = title;
         this.updatedAt = LocalDateTime.now();
     }
+    public void setDescription(String description) {
+        this.description = description;
+        this.updatedAt = LocalDateTime.now();
+    }
 }
