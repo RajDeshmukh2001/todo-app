@@ -4,12 +4,12 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Task {
-    private String id;
+    private final String id;
     private String title;
     private String description;
     private Status status;
     private Priority priority;
-    private LocalDateTime createdAt;
+    private final LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     public Task(String title, String description, Priority priority) {
