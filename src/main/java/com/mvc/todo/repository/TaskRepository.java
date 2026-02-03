@@ -10,4 +10,5 @@ public interface TaskRepository {
     Task findById(String id);
     void deleteById(String id);
     boolean isExistsById(String id);
+    boolean isExistsByTitle(String title);
 }
