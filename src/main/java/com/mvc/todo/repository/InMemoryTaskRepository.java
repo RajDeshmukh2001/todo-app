@@ -28,6 +28,10 @@ public class InMemoryTaskRepository implements TaskRepository {
     public void deleteById(String id) {
         taskMap.remove(id);
     }
+    @Override
+    public boolean isExistsById(String id) {
+        return taskMap.containsKey(id);
+    }
 
 
 }
