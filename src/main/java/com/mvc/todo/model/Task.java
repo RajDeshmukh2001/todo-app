@@ -59,4 +59,8 @@ public class Task {
         this.description = description;
         this.updatedAt = LocalDateTime.now();
     }
+    public void setStatus(Status status) {
+        this.status = status;
+        this.updatedAt = LocalDateTime.now();
+    }
 }
