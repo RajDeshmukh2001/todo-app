@@ -4,15 +4,18 @@ import com.mvc.todo.model.Task;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class InMemoryTaskRepository implements TaskRepository {
-    private List<Task> tasks = new ArrayList<>();
-
+    private final Map<String, Task> taskMap = new HashMap<>();
     @Override
-    public Task saveTask(Task task) {
-        tasks.add(task);
+    public Task save(Task task) {
+        taskMap.put(task.getId(), task);
         return task;
     }
+
+
 }
