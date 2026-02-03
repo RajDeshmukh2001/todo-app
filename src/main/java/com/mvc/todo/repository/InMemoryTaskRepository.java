@@ -20,6 +20,10 @@ public class InMemoryTaskRepository implements TaskRepository {
     public List<Task> findAll() {
         return new ArrayList<>(taskMap.values());
     }
+    @Override
+    public Task findById(String id) {
+        return taskMap.get(id);
+    }
 
 
 }
