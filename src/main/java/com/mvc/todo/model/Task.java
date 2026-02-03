@@ -63,4 +63,8 @@ public class Task {
         this.status = status;
         this.updatedAt = LocalDateTime.now();
     }
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+        this.updatedAt = LocalDateTime.now();
+    }
 }
