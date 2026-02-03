@@ -3,7 +3,9 @@ package com.mvc.todo.service;
 import com.mvc.todo.model.Priority;
 import com.mvc.todo.model.Task;
 import com.mvc.todo.repository.TaskRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class TaskService {
     private TaskRepository taskRepository;
 
