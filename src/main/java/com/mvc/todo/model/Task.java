@@ -50,4 +50,9 @@ public class Task {
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+        this.updatedAt = LocalDateTime.now();
+    }
 }
