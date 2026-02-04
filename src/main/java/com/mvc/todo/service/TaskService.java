@@ -5,6 +5,8 @@ import com.mvc.todo.model.Task;
 import com.mvc.todo.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TaskService {
     private TaskRepository taskRepository;
@@ -19,5 +21,9 @@ public class TaskService {
         }
         Task task = new Task(title, description, priority);
         return taskRepository.save(task);
+    }
+
+    public List<Task> getAllTasks() {
+        return taskRepository.findAll();
     }
 }
