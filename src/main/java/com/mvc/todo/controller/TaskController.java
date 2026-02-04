@@ -25,9 +25,9 @@ public class TaskController {
     }
 
     @GetMapping
-    public List<Task> getAllTasks(
+    public List<Task> getTasks(
             @RequestParam(required = false) Status status,
             @RequestParam(required = false) Priority priority) {
-        return taskService.getAllTasks(status, priority);
+        return taskService.getTasks(status, priority);
     }
 }

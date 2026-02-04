@@ -39,6 +39,23 @@ Design and implement a robust RESTful API for a Task Management System. The appl
 
 ---
 
+## API Functionalities
+
+### 1. Create Task
+- Accepts task details via request body
+- Validates input
+- Prevents duplicate task titles
+- Sets default status to `PENDING`
+- Automatically generates UUID and timestamps
+
+### 2. Get All Tasks
+- Returns all tasks
+- Supports filtering by:
+    - Status
+    - Priority
+
+---
+
 ## Project Structure
 
 ```src/main/java/com/example/todoapp
@@ -97,7 +114,53 @@ mvn clean install
 ```
 
 5. The application will be accessible at `http://localhost:8080`
- ---
+ 
+---
+
+## Query Parameter Case Sensitivity
+
+The API uses Java `enum` types for certain query parameters.  
+As a result, **query parameter values are case-sensitive**.
+
+#### Supported values
+
+**Status**
+- `PENDING`
+- `IN_PROGRESS`
+- `COMPLETED`
+
+**Priority**
+- `LOW`
+- `MEDIUM`
+- `HIGH`
+
+#### Examples
+
+✅ Valid request:
+```
+GET /v1/api/tasks?status=PENDING
+```
+```
+GET /v1/api/tasks?priority=HIGH
+```
+
+❌ Invalid request:
+```
+GET /v1/api/tasks?status=pending
+```
+```
+GET /v1/api/tasks?priority=high
+```
+
+It will result in a `400 Bad Request` error with a message:
+```json
+{
+    "message": "Invalid value for priority"
+}
+```
+Clients must use **uppercase enum values** exactly as defined.
+
+---
 
 ## Testing the API
 
