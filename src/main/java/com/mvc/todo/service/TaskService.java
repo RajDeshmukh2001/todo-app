@@ -1,5 +1,6 @@
 package com.mvc.todo.service;
 
+import com.mvc.todo.exception.DuplicateTaskTitleException;
 import com.mvc.todo.model.Priority;
 import com.mvc.todo.model.Status;
 import com.mvc.todo.model.Task;
@@ -19,7 +20,7 @@ public class TaskService {
 
     public Task createTask(String title, String description, Priority priority) {
         if (taskRepository.isExistsByTitle((title.trim().replaceAll("\\s+ ", " ")))) {
-            throw new IllegalArgumentException("Task with title '" + title + "' already exists.");
+            throw new DuplicateTaskTitleException("Task with title '" + title + "' already exists.");
         }
         Task task = new Task(title, description, priority);
         return taskRepository.save(task);
