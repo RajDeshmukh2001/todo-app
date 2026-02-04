@@ -7,6 +7,8 @@ import com.mvc.todo.validator.CreateTaskRequest;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("v1/api/tasks")
 public class TaskController {
@@ -19,5 +21,10 @@ public class TaskController {
     @PostMapping("/create")
     public Task create(@Valid @RequestBody CreateTaskRequest request) {
         return taskService.createTask(request.getTitle(), request.getDescription(), request.getPriority());
+    }
+
+    @GetMapping
+    public List<Task> getAllTasks() {
+        return taskService.getAllTasks();
     }
 }
