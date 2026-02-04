@@ -17,22 +17,6 @@ public class InMemoryTaskRepository implements TaskRepository {
         return task;
     }
     @Override
-    public List<Task> findAll() {
-        return new ArrayList<>(taskMap.values());
-    }
-    @Override
-    public Task findById(String id) {
-        return taskMap.get(id);
-    }
-    @Override
-    public void deleteById(String id) {
-        taskMap.remove(id);
-    }
-    @Override
-    public boolean isExistsById(String id) {
-        return taskMap.containsKey(id);
-    }
-    @Override
     public boolean isExistsByTitle(String title) {
         return taskMap.values().stream().anyMatch(task -> task.getTitle().equalsIgnoreCase(title));
     }
