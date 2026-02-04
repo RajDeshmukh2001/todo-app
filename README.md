@@ -120,3 +120,39 @@ Plaintext:
 ```
 Error: Task with title 'Complete Backend Demo' already exists.
 ```
+### 2. List All Tasks API
+Retrieve all tasks with optional filtering capabilities.
+
+#### Endpoint
+```
+GET /v1/api/tasks
+```
+
+#### Query Parameters (Optional)
+| Parameter | Values | Description |
+|-----------|--------|-------------|
+| `status` | `PENDING`, `IN_PROGRESS`, `COMPLETED` | Filter tasks by status |
+| `priority` | `LOW`, `MEDIUM`, `HIGH` | Filter tasks by priority |
+
+
+**Test with Postman:**
+- Open Postman.
+- Create a new request.
+- Method: GET
+- URL: `http://localhost:8080/v1/api/tasks` (or add query parameters like `?priority=HIGH` or `priority=MEDIUM&status=PENDING` , parameters are currently in Uppercase ex, HIGH,LOW,MEDIUM for priority, COMPLETED, IN_PROGESS,  PENDING for status)
+- Click Send.
+
+#### Expected Response (200 OK)
+```json
+[
+    {
+        "id": "c5f8d2-418b-4c5c-a5cb-150fd7200ab6",
+        "title": "Complete Backend Demo",
+        "description": "Verify the Create Task feature.",
+        "status": "PENDING",
+        "priority": "HIGH",
+        "createdAt": "2026-02-04T12:00:00.000",
+        "updatedAt": "2026-02-04T12:00:00.000"
+    }
+]
+```
