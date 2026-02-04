@@ -29,37 +29,87 @@ Design and implement a robust RESTful API for a Task Management System. The appl
 
 ---
 
-## Features to Be Implemented
-
-### Task Entity
-Each task will have:
-- Unique identifier (**UUID**)
-- Title (required, max 100 characters, must be unique)
-- Description (required, max 500 characters)
-- Status (`PENDING`, `IN_PROGRESS`, `COMPLETED`)
-- Priority (`LOW`, `MEDIUM`, `HIGH`)
-- Timestamps:
-    - Created At
-    - Updated At
+## Tech Stack
+- Java 17+
+- Spring Boot
+- Spring Web
+- Spring Validation (Bean Validation)
+- Maven
+- In-memory data storage (No Database)
 
 ---
 
-## Architecture Overview
+## Project Structure
 
-The project follows **MVC + Clean Architecture**:
+```src/main/java/com/example/todoapp
+src/main/java/com/mvc/todo
+│
+├── controller
+│   └── TaskController.java
+│
+├── model
+│   ├── Task.java
+│   ├── Status.java
+│   └── Priority.java
+│
+├── service
+│   └── TaskService.java
+│   
+├── repository
+│   ├── TaskRepository.java
+│   └── InMemoryTaskRepository.java
+│   
+├── exception
+│   └── DuplicateTaskTitleException.java
+│
+├── validator
+│   └── CreateTaskRequest.java
+│
+└── TodoAppApplication.java
+```
 
-- **Controller Layer**
-    - Handles HTTP requests and responses
-    - Delegates business logic to services
+---
 
-- **Service Layer**
-    - Contains business rules and validations
-    - Coordinates between controller and repository
+## Installation & Setup
+### Prerequisites
+- Java 17 or higher
+- Maven
 
-- **Model Layer**
-    - Represents domain objects and enums
-    - Independent of frameworks
+### Steps
+1. Clone the repository
+```
+git clone https://github.com/RajDeshmukh2001/todo-app.git
+```
 
-- **Repository Layer**
-    - In-memory data storage
-    - Abstracted using interfaces for future DB support
+2. Navigate to the project directory
+```
+cd todo-application
+```
+
+3. Build the project
+```
+mvn clean install
+```
+
+4. Run the application
+```
+./mvnw spring-boot:run
+```
+
+5. The application will be accessible at `http://localhost:8080`
+ ---
+
+## Testing the API
+
+### You can test the API using:
+- Postman
+
+All responses are returned in JSON format with appropriate HTTP status codes.
+
+---
+
+## Out of Scope
+- No database is used (data resets on application restart)
+- Authentication and authorization are out of scope
+- Pagination and sorting are not implemented
+- Designed purely for learning MVC, OOP, and clean backend architecture
