@@ -19,10 +19,18 @@ public class TaskService {
     }
 
     public Task createTask(String title, String description, Priority priority) {
-        if (taskRepository.isExistsByTitle((title.trim().replaceAll("\\s+", " ")))) {
-            throw new DuplicateTaskTitleException("Task with title '" + title + "' already exists.");
+        String validTitle = title.trim().replaceAll("\\s+", " ");
+
+        if (validTitle.isBlank()) {
+            throw new IllegalArgumentException("Title cannot be empty");
         }
-        Task task = new Task(title, description, priority);
+
+        if (taskRepository.isExistsByTitle(validTitle)) {
+            throw new DuplicateTaskTitleException(
+                    "Task with title '" + validTitle + "' already exists."
+            );
+        }
+        Task task = new Task(validTitle, description, priority);
         return taskRepository.save(task);
     }
 
