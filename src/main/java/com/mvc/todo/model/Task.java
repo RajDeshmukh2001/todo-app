@@ -50,4 +50,21 @@ public class Task {
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+        this.updatedAt = LocalDateTime.now();
+    }
+    public void setDescription(String description) {
+        this.description = description;
+        this.updatedAt = LocalDateTime.now();
+    }
+    public void setStatus(Status status) {
+        this.status = status;
+        this.updatedAt = LocalDateTime.now();
+    }
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+        this.updatedAt = LocalDateTime.now();
+    }
 }
