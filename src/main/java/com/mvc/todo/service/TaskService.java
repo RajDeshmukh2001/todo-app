@@ -86,4 +86,11 @@ public class TaskService {
                 .filter(task -> priority == null || task.getPriority() == priority)
                 .collect(Collectors.toList());
     }
+
+    public void deleteTask(String id) {
+        if (taskRepository.findById(id) == null) {
+            throw new TaskNotFoundException("Task with id '" + id + "' not found.");
+        }
+        taskRepository.deleteById(id);
+    }
 }
