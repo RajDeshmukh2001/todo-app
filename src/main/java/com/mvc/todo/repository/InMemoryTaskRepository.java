@@ -22,6 +22,7 @@ public class InMemoryTaskRepository implements TaskRepository {
     public Task findById(String id) {
         return taskMap.get(id);
     }
+
     @Override
     public boolean existsByTitle(String title) {
         return taskMap.values().stream().anyMatch(task -> task.getTitle().equalsIgnoreCase(title));
@@ -30,5 +31,10 @@ public class InMemoryTaskRepository implements TaskRepository {
     @Override
     public List<Task> findAll() {
         return new ArrayList<>(taskMap.values());
+    }
+
+    @Override
+    public void deleteById(String id) {
+        taskMap.remove(id);
     }
 }
