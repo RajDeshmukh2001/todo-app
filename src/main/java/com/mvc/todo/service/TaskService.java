@@ -34,4 +34,43 @@ public class TaskService {
         Task task = new Task(title, description, priority);
         return taskRepository.save(task);
     }
+
+    public Task updateTask(String id, UpdateTaskRequest request) {
+        Task task = taskRepository.findById(id);
+        if (task == null) {
+            throw new TaskNotFoundException("Task with id '" + id + "' not found.");
+        }
+
+        boolean updated = false;
+        if (request.getTitle() != null) {
+            String title = validateTextInput(request.getTitle(), "Title", 100);
+            if (!title.equals(task.getTitle()) && taskRepository.existsByTitle(title)) {
+                throw new DuplicateTaskTitleException("Task with title '" + title + "' already exists.");
+            }
+            task.setTitle(title);
+            updated = true;
+        }
+
+        if (request.getDescription() != null) {
+            String description = validateTextInput(request.getDescription(), "Description", 500);
+            task.setDescription(description);
+            updated = true;
+        }
+
+        if (request.getStatus() != null) {
+            task.setStatus(request.getStatus());
+            updated = true;
+        }
+
+        if (request.getPriority() != null) {
+            task.setPriority(request.getPriority());
+            updated = true;
+        }
+
+        if (updated) {
+            task.setUpdatedAt();
+        }
+
+        return taskRepository.save(task);
+    }
 }
