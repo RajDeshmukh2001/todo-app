@@ -32,10 +32,12 @@ public class TaskService {
     }
 
     public Task createTask(String title, String description, Priority priority) {
-        if (taskRepository.existsByTitle(validateTextInput(title, "Title", 100))) {
+        String validTitle = validateTextInput(title, "Title", 100);
+        String validDescription = validateTextInput(description, "Description", 500);
+        if (taskRepository.existsByTitle(validTitle)) {
             throw new DuplicateTaskTitleException("Task with title '" + title + "' already exists.");
         }
-        Task task = new Task(validTitle, description, priority);
+        Task task = new Task(validTitle, validDescription, priority);
         return taskRepository.save(task);
     }
 
@@ -77,6 +79,7 @@ public class TaskService {
 
         return taskRepository.save(task);
     }
+
     public List<Task> getTasks(Status status, Priority priority) {
         return taskRepository.findAll().stream()
                 .filter(task -> status == null || task.getStatus() == status)
