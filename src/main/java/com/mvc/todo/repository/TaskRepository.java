@@ -8,4 +8,5 @@ public interface TaskRepository {
     Task save(Task task);
     Task findById(String id);
     boolean existsByTitle(String title);
+    List<Task> findAll();
 }

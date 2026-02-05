@@ -3,15 +3,6 @@
 ## Problem Statement
 Design and implement a robust RESTful API for a Task Management System. The application must be built using the Model-View-Controller (MVC) architectural pattern, where the "View" is represented by JSON responses, No Database. The primary goal is to demonstrate mastery of Object-Oriented Programming (OOP) and Clean Architecture.
 
-## Tech Stack
-
-- Language: [Java 21](https://www.oracle.com/in/java/technologies/downloads/#java21)  
-- Framework: [Spring Boot 3.4.2](https://spring.io/blog/2025/02/20/spring-boot-3-4-3-available-now)  
-- Build Tool: [Maven](https://maven.apache.org/)  
-- Architecture: [MVC](https://en.wikipedia.org/wiki/Model-view-controller)
-
-
-
 #### Each task should have:
 - A unique identifier (UUID).
 - A title (required, max 100 chars).
@@ -38,85 +29,151 @@ Design and implement a robust RESTful API for a Task Management System. The appl
 
 ---
 
-## Features to Be Implemented
+## API Functionalities
 
-### Task Entity
-Each task will have:
-- Unique identifier (**UUID**)
-- Title (required, max 100 characters, must be unique)
-- Description (required, max 500 characters)
-- Status (`PENDING`, `IN_PROGRESS`, `COMPLETED`)
-- Priority (`LOW`, `MEDIUM`, `HIGH`)
-- Timestamps:
-    - Created At
-    - Updated At
+### 1. Create Task
+- Accepts task details via request body
+- Validates input
+- Prevents duplicate task titles
+- Sets default status to `PENDING`
+- Automatically generates UUID and timestamps
+
+### 2. Get All Tasks
+- Returns all tasks
+- Supports filtering by:
+    - Status
+    - Priority
 
 ---
 
-## Features Implemented
+## Tech Stack
+- Java 17+
+- Spring Boot
+- Spring Web
+- Spring Validation (Bean Validation)
+- Maven
+- In-memory data storage (No Database)
 
-### 1. Create Task API
-Allows users to create new tasks with strict validation rules.
-- **Auto-generated ID:** Each task gets a unique UUID.
-- **Timestamps:** Automatically records `createdAt` and `updatedAt`.
-- **Default Status:** New tasks are set to `PENDING` by default.
-- **Duplicate Prevention:** The system checks if a task with the same title already exists before saving.
-- **Input Validation:** Ensures titles and descriptions meet length requirements.
+---
 
-```markdown
-### Clone \& Run the Application
-You need to get the code and start the backend server first.
+## Project Structure
 
-```bash
-# 1. Clone the repository
+```src/main/java/com/example/todoapp
+src/main/java/com/mvc/todo
+│
+├── controller
+│   └── TaskController.java
+│
+├── model
+│   ├── Task.java
+│   ├── Status.java
+│   └── Priority.java
+│
+├── service
+│   └── TaskService.java
+│   
+├── repository
+│   ├── TaskRepository.java
+│   └── InMemoryTaskRepository.java
+│   
+├── exception
+│   ├── DuplicateTaskTitleException.java
+│   └── GlobalExceptionHandler.java
+│
+├── validator
+│   └── CreateTaskRequest.java
+│
+└── TodoAppApplication.java
+```
+
+---
+
+## Installation & Setup
+### Prerequisites
+- Java 17 or higher
+- Maven
+
+### Steps
+1. Clone the repository
+```
 git clone https://github.com/RajDeshmukh2001/todo-app.git
+```
 
-# 2. Navigate into the project directory
-cd todo-app
+2. Navigate to the project directory
+```
+cd todo-application
+```
 
-# 3. Start the server (Using Maven Wrapper)
+3. Build the project
+```
+mvn clean install
+```
+
+4. Run the application
+```
 ./mvnw spring-boot:run
 ```
 
-Success: You will see Started TodoApplication in ... seconds in your terminal. The server is now running at http://localhost:8080.
+5. The application will be accessible at `http://localhost:8080`
+ ---
 
-### Test with Postman
-To create a task, send a POST request with the JSON payload shown below.
+## Testing the API
 
-- Open Postman.
-- Create a new request.
-- Method: POST
-- URL: `http://localhost:8080/v1/api/tasks/create`
-- Body: raw `JSON` and paste the payload.
+### You can test the API using:
+- Postman
 
+All responses are returned in JSON format with appropriate HTTP status codes.
+
+---
+
+## Query Parameter Case Sensitivity
+
+The API uses Java `enum` types for certain query parameters.  
+As a result, **query parameter values are case-sensitive**.
+
+#### Supported values
+
+**Status**
+- `PENDING`
+- `IN_PROGRESS`
+- `COMPLETED`
+
+**Priority**
+- `LOW`
+- `MEDIUM`
+- `HIGH`
+
+#### Examples
+
+✅ Valid request:
+```
+GET /v1/api/tasks?status=PENDING
+```
+```
+GET /v1/api/tasks?priority=HIGH
+```
+
+❌ Invalid request:
+```
+GET /v1/api/tasks?status=pending
+```
+```
+GET /v1/api/tasks?priority=high
+```
+
+It will result in a `400 Bad Request` error with a message:
 ```json
 {
-    "title": "   Complete Backend Demo   ",
-    "description": "Test the Create Task feature using Postman and verify the response.",
-    "priority": "HIGH"
+    "message": "Invalid value for priority"
 }
 ```
 
-### Verify the Result
+Clients must use **uppercase enum values** exactly as defined.
 
-Expected Success Response \(200 OK\):
+---
 
-```json
-{
-    "id": "c5f8d2-418b-4c5c-a5cb-150fd7200ab6",
-    "title": "Complete Backend Demo",
-    "description": "Test the Create Task feature using Postman and verify the response.",
-    "status": "PENDING",
-    "priority": "HIGH",
-    "createdAt": "2026-02-04T12:00:00.000",
-    "updatedAt": "2026-02-04T12:00:00.000"
-}
-```
-
- Expected Failure \(Duplicate Title\):
-
-Plaintext:
-
-```
-Error: Task with title 'Complete Backend Demo' already exists.
-```
+## Out of Scope
+- No database is used (data resets on application restart)
+- Authentication and authorization are out of scope
+- Pagination and sorting are not implemented
+- Designed purely for learning MVC, OOP, and clean backend architecture
