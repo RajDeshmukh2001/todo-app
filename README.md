@@ -1,4 +1,4 @@
-# Todo Application – Spring Boot
+# Task Management Application – Spring Boot
 
 ## Problem Statement
 Design and implement a robust RESTful API for a Task Management System. The application must be built using the Model-View-Controller (MVC) architectural pattern, where the "View" is represented by JSON responses, No Database. The primary goal is to demonstrate mastery of Object-Oriented Programming (OOP) and Clean Architecture.
@@ -54,6 +54,23 @@ Design and implement a robust RESTful API for a Task Management System. The appl
     - Status
     - Priority
 
+### 3. Update Task
+- Supports **partial updates**
+- Allows updating one or more fields:
+  - Title
+  - Description
+  - Status
+  - Priority
+- Updates `updatedAt` timestamp automatically
+
+---
+
+## Tech Stack
+- Java 17+
+- Spring Boot
+- Maven
+- In-memory data storage (No Database)
+
 ---
 
 ## Project Structure
@@ -77,10 +94,13 @@ src/main/java/com/mvc/todo
 │   └── InMemoryTaskRepository.java
 │   
 ├── exception
-│   └── DuplicateTaskTitleException.java
+│   ├── DuplicateTaskTitleException.java
+│   ├── GlobalExceptionHandler.java
+│   └── TaskNotFoundException.java
 │
 ├── validator
-│   └── CreateTaskRequest.java
+│   ├── CreateTaskRequest.java
+│   └── UpdateTaskRequest.java
 │
 └── TodoAppApplication.java
 ```
@@ -90,7 +110,6 @@ src/main/java/com/mvc/todo
 ## Installation & Setup
 ### Prerequisites
 - Java 17 or higher
-- Maven
 
 ### Steps
 1. Clone the repository
@@ -114,7 +133,16 @@ mvn clean install
 ```
 
 5. The application will be accessible at `http://localhost:8080`
- 
+ ---
+
+## Testing the API
+
+### You can test the API using:
+- Postman
+- cURL
+
+All responses are returned in JSON format with appropriate HTTP status codes.
+
 ---
 
 ## Query Parameter Case Sensitivity
@@ -175,4 +203,3 @@ All responses are returned in JSON format with appropriate HTTP status codes.
 - No database is used (data resets on application restart)
 - Authentication and authorization are out of scope
 - Pagination and sorting are not implemented
-- Designed purely for learning MVC, OOP, and clean backend architecture
