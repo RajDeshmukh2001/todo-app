@@ -29,6 +29,16 @@ Design and implement a robust RESTful API for a Task Management System. The appl
 
 ---
 
+## Tech Stack
+- Java 17+
+- Spring Boot
+- Spring Web
+- Spring Validation (Bean Validation)
+- Maven
+- In-memory data storage (No Database)
+
+---
+
 ## API Functionalities
 
 ### 1. Create Task
@@ -176,8 +186,16 @@ It will result in a `400 Bad Request` error with a message:
     "message": "Invalid value for priority"
 }
 ```
-
 Clients must use **uppercase enum values** exactly as defined.
+
+---
+
+## Testing the API
+
+### You can test the API using:
+- Postman
+
+All responses are returned in JSON format with appropriate HTTP status codes.
 
 ---
 
