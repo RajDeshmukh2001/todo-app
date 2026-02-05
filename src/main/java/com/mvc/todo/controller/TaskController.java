@@ -28,6 +28,8 @@ public class TaskController {
     @PatchMapping("/{id}")
     public Task update(@PathVariable String id, @RequestBody UpdateTaskRequest request) {
         return taskService.updateTask(id, request);
+    }
+
     @GetMapping
     public List<Task> getTasks(
             @RequestParam(required = false) Status status,
