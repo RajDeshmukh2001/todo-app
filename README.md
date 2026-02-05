@@ -63,6 +63,10 @@ Design and implement a robust RESTful API for a Task Management System. The appl
   - Priority
 - Updates `updatedAt` timestamp automatically
 
+### 4. Delete Task
+- Deletes a task by ID
+- Returns appropriate HTTP status codes
+
 ---
 
 ## Tech Stack
