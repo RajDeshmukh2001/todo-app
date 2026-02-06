@@ -36,4 +36,11 @@ public class TaskController {
     public Task update(@PathVariable String id, @RequestBody UpdateTaskRequest request) {
         return taskService.updateTask(id, request);
     }
+
+    @GetMapping("/{id}")
+    public Task getTask(
+            @RequestParam(required = true) String id
+    ) {
+        return taskService.getTaskById(id);
+    }
 }
