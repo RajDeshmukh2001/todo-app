@@ -1,7 +1,6 @@
-package com.mvc.todo.validator;
+package com.mvc.todo.dto;
 
 import com.mvc.todo.model.Priority;
-import com.mvc.todo.model.Status;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

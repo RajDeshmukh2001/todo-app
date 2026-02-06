@@ -4,8 +4,8 @@ import com.mvc.todo.model.Priority;
 import com.mvc.todo.model.Status;
 import com.mvc.todo.model.Task;
 import com.mvc.todo.service.TaskService;
-import com.mvc.todo.validator.CreateTaskRequest;
-import com.mvc.todo.validator.UpdateTaskRequest;
+import com.mvc.todo.dto.CreateTaskRequest;
+import com.mvc.todo.dto.UpdateTaskRequest;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
