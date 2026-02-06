@@ -38,9 +38,7 @@ public class TaskController {
     }
 
     @GetMapping("/{id}")
-    public Task getTask(
-            @RequestParam(required = true) String id
-    ) {
+    public Task getTask(@PathVariable String id) {
         return taskService.getTaskById(id);
     }
 }
