@@ -20,8 +20,6 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-
-
     public String validateTextInput(String input, String fieldName, int maxLength) {
         String textInput = input.trim().replaceAll("\\s+", " ");
         if (textInput.isBlank()) {
@@ -87,5 +85,14 @@ public class TaskService {
                 .filter(task -> status == null || task.getStatus() == status)
                 .filter(task -> priority == null || task.getPriority() == priority)
                 .collect(Collectors.toList());
+    }
+
+    public Task getTaskById(String id) {
+        Task task = taskRepository.findById(id);
+        if (task == null) {
+            throw new TaskNotFoundException("Task with id '" + id + "' not found.");
+        } else {
+            return task;
+        }
     }
 }
