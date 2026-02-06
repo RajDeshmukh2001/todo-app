@@ -63,6 +63,10 @@ Design and implement a robust RESTful API for a Task Management System. The appl
   - Priority
 - Updates `updatedAt` timestamp automatically
 
+### 4. Get Task By ID
+- Returns a single task JSON
+- Throws a 404 Not Found error if the task with ID does not exist
+
 ---
 
 ## Tech Stack
