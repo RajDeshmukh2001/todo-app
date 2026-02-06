@@ -6,7 +6,7 @@ import com.mvc.todo.model.Priority;
 import com.mvc.todo.model.Status;
 import com.mvc.todo.model.Task;
 import com.mvc.todo.repository.TaskRepository;
-import com.mvc.todo.validator.UpdateTaskRequest;
+import com.mvc.todo.dto.UpdateTaskRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,15 +20,17 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
+
+
     public String validateTextInput(String input, String fieldName, int maxLength) {
-        String validTextInput = input.trim().replaceAll("\\s+", " ");
-        if (validTextInput.isBlank()) {
+        String textInput = input.trim().replaceAll("\\s+", " ");
+        if (textInput.isBlank()) {
             throw new IllegalArgumentException(fieldName + " is required and cannot be empty.");
         }
-        if (validTextInput.length() > maxLength) {
+        if (textInput.length() > maxLength) {
             throw new IllegalArgumentException(fieldName + " must not exceed " + maxLength + " characters.");
         }
-        return validTextInput;
+        return textInput;
     }
 
     public Task createTask(String title, String description, Priority priority) {
@@ -48,7 +50,7 @@ public class TaskService {
         }
 
         boolean updated = false;
-        if (request.getTitle() != null) {
+        if (request.getTitle() != null && !request.getTitle().equalsIgnoreCase(task.getTitle())) {
             String title = validateTextInput(request.getTitle(), "Title", 100);
             if (!title.equals(task.getTitle()) && taskRepository.existsByTitle(title)) {
                 throw new DuplicateTaskTitleException("Task with title '" + title + "' already exists.");
@@ -57,18 +59,18 @@ public class TaskService {
             updated = true;
         }
 
-        if (request.getDescription() != null) {
+        if (request.getDescription() != null && !request.getDescription().equalsIgnoreCase(task.getDescription())) {
             String description = validateTextInput(request.getDescription(), "Description", 500);
             task.setDescription(description);
             updated = true;
         }
 
-        if (request.getStatus() != null) {
+        if (request.getStatus() != null && request.getStatus() != task.getStatus()) {
             task.setStatus(request.getStatus());
             updated = true;
         }
 
-        if (request.getPriority() != null) {
+        if (request.getPriority() != null && request.getPriority() != task.getPriority()) {
             task.setPriority(request.getPriority());
             updated = true;
         }
