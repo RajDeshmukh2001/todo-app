@@ -1,4 +1,4 @@
-# Todo Application – Spring Boot
+# Task Management Application – Spring Boot
 
 ## Problem Statement
 Design and implement a robust RESTful API for a Task Management System. The application must be built using the Model-View-Controller (MVC) architectural pattern, where the "View" is represented by JSON responses, No Database. The primary goal is to demonstrate mastery of Object-Oriented Programming (OOP) and Clean Architecture.
@@ -29,6 +29,16 @@ Design and implement a robust RESTful API for a Task Management System. The appl
 
 ---
 
+## Tech Stack
+- Java 17+
+- Spring Boot
+- Spring Web
+- Spring Validation (Bean Validation)
+- Maven
+- In-memory data storage (No Database)
+
+---
+
 ## API Functionalities
 
 ### 1. Create Task
@@ -44,13 +54,20 @@ Design and implement a robust RESTful API for a Task Management System. The appl
     - Status
     - Priority
 
+### 3. Update Task
+- Supports **partial updates**
+- Allows updating one or more fields:
+  - Title
+  - Description
+  - Status
+  - Priority
+- Updates `updatedAt` timestamp automatically
+
 ---
 
 ## Tech Stack
 - Java 17+
 - Spring Boot
-- Spring Web
-- Spring Validation (Bean Validation)
 - Maven
 - In-memory data storage (No Database)
 
@@ -78,10 +95,12 @@ src/main/java/com/mvc/todo
 │   
 ├── exception
 │   ├── DuplicateTaskTitleException.java
-│   └── GlobalExceptionHandler.java
+│   ├── GlobalExceptionHandler.java
+│   └── TaskNotFoundException.java
 │
 ├── validator
-│   └── CreateTaskRequest.java
+│   ├── CreateTaskRequest.java
+│   └── UpdateTaskRequest.java
 │
 └── TodoAppApplication.java
 ```
@@ -91,7 +110,6 @@ src/main/java/com/mvc/todo
 ## Installation & Setup
 ### Prerequisites
 - Java 17 or higher
-- Maven
 
 ### Steps
 1. Clone the repository
@@ -121,6 +139,7 @@ mvn clean install
 
 ### You can test the API using:
 - Postman
+- cURL
 
 All responses are returned in JSON format with appropriate HTTP status codes.
 
@@ -167,8 +186,16 @@ It will result in a `400 Bad Request` error with a message:
     "message": "Invalid value for priority"
 }
 ```
-
 Clients must use **uppercase enum values** exactly as defined.
+
+---
+
+## Testing the API
+
+### You can test the API using:
+- Postman
+
+All responses are returned in JSON format with appropriate HTTP status codes.
 
 ---
 
@@ -176,4 +203,3 @@ Clients must use **uppercase enum values** exactly as defined.
 - No database is used (data resets on application restart)
 - Authentication and authorization are out of scope
 - Pagination and sorting are not implemented
-- Designed purely for learning MVC, OOP, and clean backend architecture

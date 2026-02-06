@@ -19,7 +19,12 @@ public class InMemoryTaskRepository implements TaskRepository {
     }
 
     @Override
-    public boolean isExistsByTitle(String title) {
+    public Task findById(String id) {
+        return taskMap.get(id);
+    }
+
+    @Override
+    public boolean existsByTitle(String title) {
         return taskMap.values().stream().anyMatch(task -> task.getTitle().equalsIgnoreCase(title));
     }
 
