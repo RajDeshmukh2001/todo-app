@@ -97,10 +97,10 @@ public class TaskService {
     }
 
     public void deleteTaskById(String id) {
-        Task task = taskRepository.deleteById(id);
-
-        if (task == null) {
+        if(taskRepository.findById(id) == null) {
             throw new TaskNotFoundException("Task with id '" + id + "' not found.");
-        };
+        }
+
+        taskRepository.deleteById(id);
     }
 }
