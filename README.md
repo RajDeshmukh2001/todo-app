@@ -69,14 +69,6 @@ Design and implement a robust RESTful API for a Task Management System. The appl
 
 ---
 
-## Tech Stack
-- Java 17+
-- Spring Boot
-- Maven
-- In-memory data storage (No Database)
-
----
-
 ## Project Structure
 
 ```src/main/java/com/example/todoapp
