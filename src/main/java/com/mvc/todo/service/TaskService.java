@@ -95,4 +95,12 @@ public class TaskService {
             return task;
         }
     }
+
+    public void deleteTaskById(String id) {
+        Task task = taskRepository.deleteById(id);
+
+        if (task == null) {
+            throw new TaskNotFoundException("Task with id '" + id + "' not found.");
+        };
+    }
 }
