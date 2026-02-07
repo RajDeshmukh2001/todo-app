@@ -7,6 +7,7 @@ import com.mvc.todo.service.TaskService;
 import com.mvc.todo.dto.CreateTaskRequest;
 import com.mvc.todo.dto.UpdateTaskRequest;
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,5 +41,11 @@ public class TaskController {
     @GetMapping("/{id}")
     public Task getTask(@PathVariable String id) {
         return taskService.getTaskById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTask(@PathVariable String id) {
+        taskService.deleteTaskById(id);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -32,4 +32,9 @@ public class InMemoryTaskRepository implements TaskRepository {
     public List<Task> findAll() {
         return new ArrayList<>(taskMap.values());
     }
+
+    @Override
+    public void deleteById(String id){
+        taskMap.remove(id);
+    }
 }
