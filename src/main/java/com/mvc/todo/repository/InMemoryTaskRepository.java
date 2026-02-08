@@ -19,6 +19,14 @@ public class InMemoryTaskRepository implements TaskRepository {
     }
 
     @Override
+    public List<Task> saveAll(List<Task> tasks) {
+        for(Task task: tasks) {
+            taskMap.put(task.getId(), task);
+        }
+        return tasks;
+    }
+
+    @Override
     public Task findById(String id) {
         return taskMap.get(id);
     }
