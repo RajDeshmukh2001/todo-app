@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface TaskRepository {
     Task save(Task task);
+    List<Task> saveAll(List<Task> tasks);
     List<Task> findAll();
     Task findById(String id);
     boolean existsByTitle(String title);
