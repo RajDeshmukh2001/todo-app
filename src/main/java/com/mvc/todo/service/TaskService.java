@@ -116,6 +116,15 @@ public class TaskService {
 
             String validTitle = validateTextInput(title, "Title", 100);
             String validDescription = validateTextInput(description, "Description", 500);
+
+            // Checking if there is any repeated title in the request's list of tasks
+            boolean alreadyInList = createdTasks.stream().
+                    anyMatch(task -> task.getTitle().equalsIgnoreCase(validTitle));
+
+            if(alreadyInList) {
+                throw new DuplicateTaskTitleException("Duplicate title in the provided list:" + validTitle);
+            }
+
             if (taskRepository.existsByTitle(validTitle)) {
                 throw new DuplicateTaskTitleException("Task with title '" + title + "' already exists.");
             }
