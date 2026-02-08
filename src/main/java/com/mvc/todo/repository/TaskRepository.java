@@ -9,4 +9,5 @@ public interface TaskRepository {
     List<Task> findAll();
     Task findById(String id);
     boolean existsByTitle(String title);
+    void deleteById(String id);
 }
