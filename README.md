@@ -71,6 +71,11 @@ Design and implement a robust RESTful API for a Task Management System. The appl
 - Returns 204 No Content Response if successfully deleted
 - Throws a 404 Not Found error if the task with ID does not exist
 
+### 6. Add Tasks In Bulk
+- Returns a list of JSON of added tasks
+- Throws a 404 Not Found error if the task with ID does not exist
+- Throws a 400 Bad Request error if title or description in any task is invalid
+
 ---
 
 ## Project Structure
