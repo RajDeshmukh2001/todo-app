@@ -23,7 +23,7 @@ public class TaskService {
     }
 
     public String validateTextInput(String input, String fieldName, int maxLength) {
-        String textInput = input.trim().replaceAll("\\s+", " ");
+        String textInput = input.trim();
         if (textInput.isBlank()) {
             throw new IllegalArgumentException(fieldName + " is required and cannot be empty.");
         }
