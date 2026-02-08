@@ -48,4 +48,9 @@ public class TaskController {
         taskService.deleteTaskById(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/bulk")
+    public List<Task> createTasks(@Valid @RequestBody List<CreateTaskRequest> requests){
+        return taskService.createTasks(requests);
+    }
 }
