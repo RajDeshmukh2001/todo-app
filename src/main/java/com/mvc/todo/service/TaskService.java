@@ -1,5 +1,6 @@
 package com.mvc.todo.service;
 
+import com.mvc.todo.dto.CreateTaskRequest;
 import com.mvc.todo.exception.DuplicateTaskTitleException;
 import com.mvc.todo.exception.TaskNotFoundException;
 import com.mvc.todo.model.Priority;
@@ -9,6 +10,7 @@ import com.mvc.todo.repository.TaskRepository;
 import com.mvc.todo.dto.UpdateTaskRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -102,5 +104,27 @@ public class TaskService {
         }
 
         taskRepository.deleteById(id);
+    }
+
+    public List<Task> createTasks(List<CreateTaskRequest> requests) {
+        List<Task> createdTasks = new ArrayList<>();
+
+        for (CreateTaskRequest request: requests) {
+            String title = request.getTitle();
+            String description = request.getDescription();
+            Priority priority = request.getPriority();
+
+            String validTitle = validateTextInput(title, "Title", 100);
+            String validDescription = validateTextInput(description, "Description", 500);
+            if (taskRepository.existsByTitle(validTitle)) {
+                throw new DuplicateTaskTitleException("Task with title '" + title + "' already exists.");
+            }
+
+            Task createdTask = new Task(validTitle, validDescription, priority);
+
+            createdTasks.add(createdTask);
+        }
+
+        return taskRepository.saveAll(createdTasks);
     }
 }
