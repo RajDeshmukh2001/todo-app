@@ -7,13 +7,16 @@ import com.mvc.todo.service.TaskService;
 import com.mvc.todo.dto.CreateTaskRequest;
 import com.mvc.todo.dto.UpdateTaskRequest;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/v1/api/tasks")
+@Validated
 public class TaskController {
     private final TaskService taskService;
 
@@ -47,5 +50,11 @@ public class TaskController {
     public ResponseEntity<Void> deleteTask(@PathVariable String id) {
         taskService.deleteTaskById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/bulk")
+    @ResponseStatus(HttpStatus.CREATED)
+    public List<Task> createTasks(@Valid @RequestBody List<CreateTaskRequest> requests){
+        return taskService.createTasks(requests);
     }
 }
