@@ -23,11 +23,11 @@ public class TaskController {
     public TaskController(TaskService taskService) {
         this.taskService = taskService;
     }
-
-    @PostMapping
-    public Task create(@Valid @RequestBody CreateTaskRequest request) {
-        return taskService.createTask(request.getTitle(), request.getDescription(), request.getPriority());
-    }
+//
+//    @PostMapping
+//    public Task create(@Valid @RequestBody CreateTaskRequest request) {
+//        return taskService.createTask(request.getTitle(), request.getDescription(), request.getPriority());
+//    }
 
     @GetMapping
     public List<Task> getTasks(
@@ -35,26 +35,26 @@ public class TaskController {
             @RequestParam(required = false) Priority priority) {
         return taskService.getTasks(status, priority);
     }
-
-    @PatchMapping("/{id}")
-    public Task update(@PathVariable String id, @RequestBody UpdateTaskRequest request) {
-        return taskService.updateTask(id, request);
-    }
-
-    @GetMapping("/{id}")
-    public Task getTask(@PathVariable String id) {
-        return taskService.getTaskById(id);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTask(@PathVariable String id) {
-        taskService.deleteTaskById(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @PostMapping("/bulk")
-    @ResponseStatus(HttpStatus.CREATED)
-    public List<Task> createTasks(@Valid @RequestBody List<CreateTaskRequest> requests){
-        return taskService.createTasks(requests);
-    }
+//
+//    @PatchMapping("/{id}")
+//    public Task update(@PathVariable String id, @RequestBody UpdateTaskRequest request) {
+//        return taskService.updateTask(id, request);
+//    }
+//
+//    @GetMapping("/{id}")
+//    public Task getTask(@PathVariable String id) {
+//        return taskService.getTaskById(id);
+//    }
+//
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<Void> deleteTask(@PathVariable String id) {
+//        taskService.deleteTaskById(id);
+//        return ResponseEntity.noContent().build();
+//    }
+//
+//    @PostMapping("/bulk")
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public List<Task> createTasks(@Valid @RequestBody List<CreateTaskRequest> requests){
+//        return taskService.createTasks(requests);
+//    }
 }
